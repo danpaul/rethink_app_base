@@ -10,14 +10,17 @@
 */
 
 var BaseModel = require('../lib/rethink_base_model');
-var baseModel = new BaseModel;
+// var baseModel = new BaseModel;
 
 module.exports = function(app){
 
-    baseModel.extend(this, app, __filename);
+    var model = new BaseModel(this, app, __filename);
+
+    // set model defaults
+    model.defaults  = {defaultField: true}
 
     // defines the rethink indexes
-    this.indexes = ['mostRecent', {compound_index: ['field_one', 'field_two']}];
+    model.indexes = ['mostRecent', {compound_index: ['field_one', 'field_two']}];
 
-    return this;
+    return model;
 }
