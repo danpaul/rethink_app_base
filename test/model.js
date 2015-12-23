@@ -36,6 +36,9 @@ module.exports = function(app, callbackIn){
                 assert(newModel.foo === 'bar');
                 assert(newModel.baz === true);
                 assert(newModel.bat === 88);
+                // check default field
+                assert(newModel.defaultField === true);
+
                 callback();
             });
         },
