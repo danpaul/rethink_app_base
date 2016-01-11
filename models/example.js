@@ -1,3 +1,5 @@
+var r = require('rethinkdb');
+
 /**
     Keep this as a tempalte and for testing(`../test/model.js`)
 
@@ -10,7 +12,6 @@
 */
 
 var BaseModel = require('../lib/rethink_base_model');
-// var baseModel = new BaseModel;
 
 module.exports = function(app){
 
@@ -20,7 +21,10 @@ module.exports = function(app){
     model.defaults  = {defaultField: true}
 
     // defines the rethink indexes
-    model.indexes = ['mostRecent', {compound_index: ['field_one', 'field_two']}];
+    model.indexes = ['mostRecent', 'timestamp', {compound_index: ['field_one', 'field_two']}];
+
+    // used for .getPublic method
+    model.publicFields = ['foo', 'bar'];
 
     return model;
 }
